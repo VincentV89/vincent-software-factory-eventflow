@@ -41,6 +41,16 @@ export default function HomePage() {
     return () => clearInterval(t);
   }, [refresh]);
 
+  // The SPA renders only after /config.json has loaded, so the browser's native jump to a URL fragment
+  // (e.g. /#register from the nav or a shared link) happens before the target exists. Scroll manually
+  // once on mount and again once the event has loaded (content above the target may change height).
+  const eventLoaded = !!event;
+  useEffect(() => {
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView());
+  }, [eventLoaded]);
+
   const pct = event ? Math.min(100, event.capacityPercent) : 0;
 
   return (

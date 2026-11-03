@@ -162,10 +162,10 @@ export default function DashboardPage() {
 
             {/* KPI cards */}
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <Kpi label="Total registrations" value={registered} hint={`${last7} in the last 7 days`} accent="from-indigo-500 to-violet-500" icon="👥" />
-              <Kpi label="Available seats" value={available} hint={`of ${capacity} total capacity`} accent="from-cyan-500 to-sky-500" icon="🎟️" />
-              <Kpi label="Capacity filled" value={`${pct}%`} hint={pct >= 90 ? 'Almost sold out' : pct >= 50 ? 'Filling up fast' : 'Plenty of room'} accent="from-fuchsia-500 to-pink-500" icon="📈" progress={pct} />
-              <Kpi label="Organizations" value={orgCount} hint={`${cancelledCount} cancelled registration${cancelledCount === 1 ? '' : 's'}`} accent="from-amber-500 to-orange-500" icon="🏢" />
+              <Kpi label="Total registrations" value={event ? registered : '—'} hint={event ? `${last7} in the last 7 days` : 'Loading…'} accent="from-indigo-500 to-violet-500" icon="👥" />
+              <Kpi label="Available seats" value={event ? available : '—'} hint={event ? `of ${capacity} total capacity` : 'Loading…'} accent="from-cyan-500 to-sky-500" icon="🎟️" />
+              <Kpi label="Capacity filled" value={event ? `${pct}%` : '—'} hint={!event ? 'Loading…' : pct >= 90 ? 'Almost sold out' : pct >= 50 ? 'Filling up fast' : 'Plenty of room'} accent="from-fuchsia-500 to-pink-500" icon="📈" progress={event ? pct : undefined} />
+              <Kpi label="Organizations" value={event ? orgCount : '—'} hint={event ? `${cancelledCount} cancelled registration${cancelledCount === 1 ? '' : 's'}` : 'Loading…'} accent="from-amber-500 to-orange-500" icon="🏢" />
             </div>
 
             {/* Charts */}
