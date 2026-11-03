@@ -105,7 +105,9 @@ export async function createRegistration(eventId: string, input: RegistrationInp
                 TableName: tableName(),
                 Key: keys.event(eventId),
                 UpdateExpression: 'SET registeredCount = registeredCount + :one, updatedAt = :now',
-                ConditionExpression: 'attribute_exists(PK) AND registeredCount < capacity',
+                // `capacity` is a DynamoDB reserved word, hence the #cap placeholder.
+                ConditionExpression: 'attribute_exists(PK) AND registeredCount < #cap',
+                ExpressionAttributeNames: { '#cap': 'capacity' },
                 ExpressionAttributeValues: { ':one': 1, ':now': registration.createdAt },
                 ReturnValuesOnConditionCheckFailure: 'ALL_OLD',
               },

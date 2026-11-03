@@ -60,7 +60,8 @@ describe('POST /events/{eventId}/registrations', () => {
     expect(b.confirmationId).toMatch(/^EVF-[0-9A-Z]{10}$/);
     const tx = ddbMock.commandCalls(TransactWriteCommand)[0].args[0].input.TransactItems!;
     expect(tx).toHaveLength(3);
-    expect(tx[0].Update?.ConditionExpression).toContain('registeredCount < capacity');
+    expect(tx[0].Update?.ConditionExpression).toContain('registeredCount < #cap');
+    expect(tx[0].Update?.ExpressionAttributeNames).toEqual({ '#cap': 'capacity' });
     expect(tx[1].Put?.ConditionExpression).toBe('attribute_not_exists(PK)');
     // the uniqueness key never contains the raw email
     expect(JSON.stringify(tx[1].Put?.Item)).not.toContain('ada@example.com');

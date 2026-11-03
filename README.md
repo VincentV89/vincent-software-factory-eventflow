@@ -150,3 +150,24 @@ A few supporting resources aren't in the core architecture list but are created 
 - **BucketDeployment:** a Lambda that uploads the SPA and `config.json`.
 - **Trigger:** runs the one-time seed function.
 - **autoDeleteObjects:** a custom resource that empties the bucket on destroy.
+
+## Current development deployment
+
+| | |
+|---|---|
+| Account / region | `879594333699` / `us-east-1` |
+| CloudFormation stack | `bgagent-dev-vincentv89-vincent-software-factory-eventflow-2496381a358f` (configured in `infra/cdk.json`) |
+| Website | https://d1p2af49hpm8dh.cloudfront.net |
+| API | https://1a6tw32ipl.execute-api.us-east-1.amazonaws.com |
+| Organizer login | https://d1p2af49hpm8dh.cloudfront.net/organizer/login, user `organizer@eventflow.example`. To get the temporary password, run `aws ssm get-parameter --region us-east-1 --with-decryption --name '/eventflow/bgagent-dev-vincentv89-vincent-software-factory-eventflow-2496381a358f/organizer-temp-password/organizer_eventflow.example' --query Parameter.Value --output text`. Alternatively, create your own account with `npm run create-organizer -- --email you@company.com`. |
+
+Resources in the stack:
+
+- CloudFront distribution and response-headers policy
+- Private S3 bucket `eventflow-dev-site-879594333699-us-east-1`
+- API Gateway HTTP API with a JWT authorizer
+- 5 Lambda functions (get-event, register, list, cancel, seed), plus the CDK helper Lambdas for BucketDeployment, Trigger and S3 auto-delete
+- DynamoDB table (on-demand)
+- Cognito user pool, app client and `organizers` group
+- CloudWatch log groups
+- IAM roles
