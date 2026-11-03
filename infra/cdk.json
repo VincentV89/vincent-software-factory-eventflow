@@ -1,0 +1,17 @@
+{
+  "app": "npx tsx bin/eventflow.ts",
+  "context": {
+    "eventflow:stackName": "bgagent-dev-vincentv89-vincent-software-factory-eventflow-2496381a358f",
+    "eventflow:region": "us-east-1",
+    "eventflow:seedMockData": true,
+    "eventflow:seedCount": 168,
+    "eventflow:extraCorsOrigins": [],
+    "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
+    "@aws-cdk/core:checkSecretUsage": true,
+    "@aws-cdk/aws-iam:minimizePolicies": true,
+    "@aws-cdk/aws-s3:createDefaultLoggingPolicy": true,
+    "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true,
+    "@aws-cdk/aws-lambda-nodejs:useLatestRuntimeVersion": true,
+    "@aws-cdk/aws-s3:serverSideEncryptionBucketKeyDefault": true
+  }
+}

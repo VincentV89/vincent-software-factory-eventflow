@@ -1,0 +1,11 @@
+node_modules/
+dist/
+cdk.out/
+*.tsbuildinfo
+.env
+.env.*
+frontend/public/config.json
+outputs.json
+infra/outputs.json
+.DS_Store
+coverage/
