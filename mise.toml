@@ -1,0 +1,22 @@
+[tasks.install]
+run = "npm ci"
+
+[tasks.build]
+description = "Type-check backend/infra and build the frontend"
+run = "npm run build"
+
+[tasks.lint]
+run = "npm run lint"
+
+[tasks.test]
+run = "npm test"
+
+[tasks.deploy]
+description = "Build and deploy the development stack with CDK"
+run = "bash scripts/deploy.sh"
+
+[tasks.smoke]
+run = "node scripts/smoke-test.mjs"
+
+[tasks.destroy]
+run = "bash scripts/destroy.sh"

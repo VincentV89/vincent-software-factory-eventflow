@@ -1,0 +1,29 @@
+{
+  "name": "eventflow",
+  "private": true,
+  "version": "1.0.0",
+  "description": "EventFlow - serverless event registration platform (React + Cloudscape + API Gateway + Lambda + DynamoDB + Cognito, deployed with AWS CDK)",
+  "workspaces": [
+    "backend",
+    "frontend",
+    "infra"
+  ],
+  "scripts": {
+    "build": "npm run build -w backend && npm run build -w frontend && npm run build -w infra",
+    "lint": "npm run lint -w backend && npm run lint -w frontend && npm run lint -w infra",
+    "test": "npm run test -w backend && npm run test -w infra",
+    "deploy": "bash scripts/deploy.sh",
+    "destroy": "bash scripts/destroy.sh",
+    "smoke-test": "node scripts/smoke-test.mjs",
+    "create-organizer": "node scripts/create-organizer.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-cloudformation": "^3.1161.0",
+    "@aws-sdk/client-cognito-identity-provider": "^3.1161.0",
+    "@aws-sdk/client-dynamodb": "^3.1161.0",
+    "@aws-sdk/client-ssm": "^3.1161.0"
+  }
+}

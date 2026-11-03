@@ -1,0 +1,26 @@
+/* Tailwind utilities without preflight, so Cloudscape's own base styles stay intact.
+ * Cloudscape's global styles (font faces + a small normalize, e.g. `a { background-color: transparent }`)
+ * are imported into the `base` layer: unlayered CSS always beats layered CSS, so importing them unlayered
+ * (from main.tsx) silently disabled Tailwind utilities such as `bg-white` on links – the hero
+ * "Reserve your seat" button rendered with no background. Cloudscape component styles stay unlayered. */
+@layer theme, base, components, utilities;
+@import '@cloudscape-design/global-styles/index.css' layer(base);
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+html, body { margin: 0; }
+
+/* The logo SVG only has a viewBox, so Chromium sized the top-navigation identity block as if the logo
+ * were Cloudscape's 10px minimum while rendering it 32px wide, truncating the title to "Event…".
+ * Give the logo a definite size so the title always fits. */
+#top-nav header img[alt='EventFlow'] { inline-size: 32px; block-size: 32px; }
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+@keyframes float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
+.animate-float { animation: float 7s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .animate-float { animation: none; } }
