@@ -1,13 +1,14 @@
 {
-  "name": "frontend",
+  "name": "@eventflow/frontend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.json && vite build",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "type": "commonjs",
   "dependencies": {
     "@cloudscape-design/collection-hooks": "^1.0.110",
     "@cloudscape-design/components": "^3.0.1408",
